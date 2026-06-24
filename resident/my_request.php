@@ -1,7 +1,13 @@
 <?php
+session_start();
 include("../config/database.php");
 
-$residentID = 1;
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit();
+}
+
+$residentID = $_SESSION['user_id'];
 $message = "";
 
 if (isset($_GET['delete'])) {
@@ -345,11 +351,12 @@ $result = mysqli_query($conn, $sql);
 <body>
 
 <div class="header">
-    <img src="../images/headerlogo.png" class="header-logo" alt="BACMS Header Logo">
+    <img src="../images/headerlogo.png" class="header-logo" alt="BACMS Logo">
 
     <div class="nav">
         <a href="dashboard.php">Dashboard</a>
         <a href="my_request.php">My Requests</a>
+        <a href="../auth/logout.php" style="color: #fcfd83;">Logout</a>
     </div>
 </div>
 
