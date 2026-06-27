@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2026 at 11:18 AM
+-- Generation Time: Jun 23, 2026 at 05:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,87 +24,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equipment_inventory`
+-- Table structure for table `service_requests`
 --
 
-CREATE TABLE `equipment_inventory` (
-  `equipment_id` int(11) NOT NULL,
-  `equipment_name` varchar(100) NOT NULL,
-  `equipment_quantity` int(11) NOT NULL,
-  `equipment_category` varchar(100) NOT NULL,
-  `equipment_status` varchar(100) NOT NULL,
-  `equipment_condition` varchar(100) NOT NULL,
-  `date_received` date NOT NULL,
-  `equipment_type` varchar(100) NOT NULL,
-  `assigned_location` varchar(100) NOT NULL,
-  `equipment_remarks` varchar(255) NOT NULL
+CREATE TABLE `service_requests` (
+  `request_id` int(11) NOT NULL,
+  `resident_id` int(11) NOT NULL,
+  `service_type` varchar(100) DEFAULT NULL,
+  `purpose` text DEFAULT NULL,
+  `needed_date` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'Pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `equipment_inventory`
+-- Dumping data for table `service_requests`
 --
 
-INSERT INTO `equipment_inventory` (`equipment_id`, `equipment_name`, `equipment_quantity`, `equipment_category`, `equipment_status`, `equipment_condition`, `date_received`, `equipment_type`, `assigned_location`, `equipment_remarks`) VALUES
-(1, 'Wheelchair', 8, 'Mobility Aid', 'Available', 'Good', '2026-06-26', 'Manual', 'Storage Room', 'Ready stock\r\n'),
-(2, 'Walker', 5, 'Mobility Aid', 'Available', 'Good', '2026-06-26', 'Manual', 'Storage Room', 'Ready for use'),
-(4, 'Wheelchair', 5, 'Mobility Aid', 'Maintenance', 'Damaged', '2026-06-26', 'Manual', 'Storage Room', 'Needs wheels to be fixed');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transport_vehicles`
---
-
-CREATE TABLE `transport_vehicles` (
-  `vehicle_id` int(11) NOT NULL,
-  `vehicle_name` varchar(100) NOT NULL,
-  `vehicle_quantity` int(11) NOT NULL,
-  `vehicle_type` varchar(100) NOT NULL,
-  `vehicle_status` varchar(100) NOT NULL,
-  `vehicle_condition` varchar(100) NOT NULL,
-  `date_acquired` date NOT NULL,
-  `assigned_location` varchar(100) NOT NULL,
-  `vehicle_remarks` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `transport_vehicles`
---
-
-INSERT INTO `transport_vehicles` (`vehicle_id`, `vehicle_name`, `vehicle_quantity`, `vehicle_type`, `vehicle_status`, `vehicle_condition`, `date_acquired`, `assigned_location`, `vehicle_remarks`) VALUES
-(5, 'Van', 5, 'Service Vehicle', 'Available', 'Good', '2026-06-27', 'Garage', 'Ready for transport');
+INSERT INTO `service_requests` (`request_id`, `resident_id`, `service_type`, `purpose`, `needed_date`, `status`, `created_at`) VALUES
+(12, 1, 'Wheelchair', 'awd', '2026-02-05', 'Pending', '2026-06-23 03:36:04');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `equipment_inventory`
+-- Indexes for table `service_requests`
 --
-ALTER TABLE `equipment_inventory`
-  ADD PRIMARY KEY (`equipment_id`);
-
---
--- Indexes for table `transport_vehicles`
---
-ALTER TABLE `transport_vehicles`
-  ADD PRIMARY KEY (`vehicle_id`);
+ALTER TABLE `service_requests`
+  ADD PRIMARY KEY (`request_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `equipment_inventory`
+-- AUTO_INCREMENT for table `service_requests`
 --
-ALTER TABLE `equipment_inventory`
-  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `transport_vehicles`
---
-ALTER TABLE `transport_vehicles`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `service_requests`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
